@@ -2,6 +2,7 @@
 __author__ = 'Administrator' 
 
 import tensorflow as tf
+# https://blog.csdn.net/geyunfei_/article/details/78782804
 
 # 创建变量 W 和 b 节点，并设置初始值
 W = tf.Variable([.1], dtype=tf.float32)
