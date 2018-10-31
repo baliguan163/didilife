@@ -23,6 +23,26 @@ sess = tf.Session()
 init = tf.global_variables_initializer()
 sess.run(init)
 
+
+print('损失值')
+print('W: %s b: %s loss: %s' % (sess.run(W), sess.run(b), sess.run(loss, {x: [1, 2, 3, 6, 8], y: [4.8, 8.5, 10.4, 21.0, 25.3]})))
+
+
+# 可以用tf.assign()对W和b变量重新赋值再检验一下
+# 给 W 和 b 赋新值
+fixW = tf.assign(W, [2.])
+fixb = tf.assign(b, [1.])
+# run 之后新值才会生效
+sess.run([fixW, fixb])
+# 重新验证损失值
+print('重新赋新值损失值')
+print('W: %s b: %s loss: %s' % (sess.run(W), sess.run(b), sess.run(loss, {x: [1, 2, 3, 6, 8], y: [4.8, 8.5, 10.4, 21.0, 25.3]})))
+
+#
+# tensorFlow 提供了很多优化算法来帮助我们训练模型。最简单的优化算法是梯度下降(Gradient Descent)算法，
+# 它通过不断的改变模型中变量的值，来找到最小损失值。
+# 如下的代码就是使用梯度下降优化算法帮助我们训练模型
+
 # 创建一个梯度下降优化器，学习率为0.001
 optimizer = tf.train.GradientDescentOptimizer(0.001)
 train = optimizer.minimize(loss)
@@ -36,6 +56,6 @@ for i in range(10000):
     sess.run(train, {x: x_train, y: y_train})
 
 # 打印一下训练后的结果
-print('W: %s b: %s loss: %s' % (sess.run(W), sess.run(
-    b), sess.run(loss, {x: x_train, y: y_train})))
+print('训练h后损失值')
+print('W: %s b: %s loss: %s' % (sess.run(W), sess.run(b), sess.run(loss, {x: x_train, y: y_train})))
 
